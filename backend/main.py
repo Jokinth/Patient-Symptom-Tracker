@@ -10,7 +10,7 @@ from fastapi.security import OAuth2PasswordBearer
 from typing import Optional
 
 # Constants for JWT
-SECRET_KEY = "your_secret_key"  # Use a secure key in production
+SECRET_KEY = "25"  
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
