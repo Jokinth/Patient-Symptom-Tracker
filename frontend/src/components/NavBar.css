@@ -1,0 +1,89 @@
+
+.navbar {
+    background-color: #F3E8FF; /* Light lavender background */
+    width: 250px; /* Set width for the navbar */
+    height: 100vh; /* Full height */
+    padding: 20px; /* Padding */
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow for depth */
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-start; /* Align items to the start */
+    transition: all 0.3s; /* Smooth transition */
+}
+
+.navbar-header {
+    margin-bottom: 2px; /* Set space below the title */
+}
+
+.navbar-title {
+    margin: 0; /* Remove margin */
+    color: #4B0082; /* Deep indigo for visibility */
+    font-size: 24px; /* Larger font size */
+}
+
+.navbar-menu {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    flex-grow: 1; /* Allow menu to grow */
+}
+
+.navbar li {
+    margin: 20px 0; /* Space between items (adjusted for a more compact look) */
+    width: 100%; /* Make list items full width */
+}
+
+.navbar-link {
+    color: #007BFF; /* Bright blue for links */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px; /* Padding around links */
+    display: block; /* Make link area larger */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Smooth transition */
+    position: relative; /* Position for pseudo-elements */
+}
+
+.navbar-link::after {
+    content: ""; /* Pseudo-element for underline effect */
+    position: absolute;
+    left: 50%;
+    bottom: 5px; /* Position slightly below the link */
+    height: 3px; /* Height of the underline */
+    width: 0; /* Start with zero width */
+    background-color: #4B0082; /* Indigo color for the underline */
+    transition: width 0.3s ease, left 0.3s ease; /* Smooth transition */
+}
+
+.navbar-link:hover {
+    background-color: #E6F7FF; /* Light blue on hover */
+    color: #0056b3; /* Darker blue text on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.navbar-link:hover::after {
+    width: 100%; /* Expand the underline to full width on hover */
+    left: 0; /* Move to the left */
+    
+}
+
+.login-button-container {
+    margin-top: auto; /* Push to the bottom of the navbar */
+}
+
+.login-button {
+    background-color: #4B0082; /* Deep indigo button */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 10px 15px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effect */
+    width: 100%; /* Full width */
+}
+
+.login-button:hover {
+    background-color: gold; /* Slate Blue on hover */
+}

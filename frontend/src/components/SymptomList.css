@@ -1,0 +1,35 @@
+
+.symptom-list-container {
+    display: flex;
+    flex-direction: row; /* Aligns NavBar next to content */
+    height: 100vh;
+    overflow: hidden;
+}
+
+.symptom-chart-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 250px; /* Navbar width */
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background for content area */
+}
+
+.chart-container {
+    width: 100%;
+    height: 100%; /* Full height of symptom-chart-container */
+    max-width: 1200px; /* Optional max width for readability */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.info-header {
+    color: #4B0082;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 20px 0;
+}

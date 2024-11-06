@@ -1,0 +1,68 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5DC; /* Light beige background */
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h2 {
+    color: #5E4B8D; /* Deep purple for the header */
+}
+
+form {
+    background-color: #fff; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 300px; /* Set a fixed width for the form */
+}
+
+input {
+    width: 100%; /* Full width */
+    padding: 10px;
+    margin: 10px 0; /* Space between inputs */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+input:focus {
+    border-color: #FFD700; /* Gold border on focus */
+    outline: none; /* Remove outline */
+}
+
+button {
+    background-color: #5E4B8D; /* Deep purple button */
+    color: white; /* White text */
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Full width */
+}
+
+button:hover {
+    background-color: #FFD700; /* Gold on hover */
+}
+
+p {
+    margin-top: 10px;
+}
+
+a {
+    color: #5E4B8D; /* Deep purple for links */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
