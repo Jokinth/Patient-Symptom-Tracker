@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { getSymptoms } from '../api';
 import NavBar from './NavBar';
@@ -10,8 +9,20 @@ const SymptomList = () => {
 
     useEffect(() => {
         const fetchSymptoms = async () => {
-            const response = await getSymptoms();
-            setSymptoms(response.data);
+            // Retrieve the token from local storage
+            const token = localStorage.getItem("access_token");
+
+            if (!token) {
+                console.error("User is not authenticated. Please log in.");
+                return;
+            }
+
+            try {
+                const response = await getSymptoms(token); // Pass token to the API function
+                setSymptoms(response.data);
+            } catch (error) {
+                console.error("Failed to fetch symptoms:", error);
+            }
         };
 
         fetchSymptoms();

@@ -1,4 +1,3 @@
-// src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Import the CSS file
@@ -6,24 +5,43 @@ import './Login.css'; // Import the CSS file
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(''); // State to handle errors
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        // Here you should add your login API call
-        // For example:
-        const response = await fetch('http://localhost:8000/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        });
+        setError(''); // Reset error message
 
-        if (response.ok) {
-            navigate('/logger');
-        } else {
-            alert('Invalid password or email');
+        try {
+            // Send login request to backend
+            const response = await fetch('http://localhost:8000/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            // Check if response is successful
+            if (response.ok) {
+                const data = await response.json(); // Get the access token from response
+                localStorage.setItem('access_token', data.access_token); // Store token in localStorage
+
+                // Optionally, fetch user data or symptoms here if needed
+                // For example, fetching symptoms:
+                // const userResponse = await fetch('http://localhost:8000/symptoms/', {
+                //     headers: {
+                //         'Authorization': `Bearer ${data.access_token}`, // Include token in the request
+                //     },
+                // });
+
+                // Redirect user to the symptom logger page after successful login
+                navigate('/logger');
+            } else {
+                setError('Invalid email or password');
+            }
+        } catch (error) {
+            setError('An error occurred. Please try again.');
         }
     };
 
@@ -47,6 +65,10 @@ const Login = () => {
                 />
                 <button type="submit">Login</button>
             </form>
+
+            {/* Display error message if any */}
+            {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
+
             <p>Don't have an account? <a href="/signup">Sign Up</a></p>
         </div>
     );
