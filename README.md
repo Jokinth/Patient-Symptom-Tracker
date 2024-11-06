@@ -1,7 +1,4 @@
-﻿# Patient-Symptom-Tracker
-Here's the formatted text for your README file:
 
-```
 # Patient Symptom Tracker
 
 A web-based application to log, track, and manage patient symptoms. Designed for healthcare professionals to monitor the progression of symptoms and provide better care to patients. 
