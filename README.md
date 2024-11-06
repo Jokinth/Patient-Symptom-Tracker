@@ -8,7 +8,7 @@ A web-based application to log, track, and manage patient symptoms. Designed for
 - **User Authentication**: Login and signup functionality for healthcare professionals.
 - **Symptom Logging**: Ability to log symptoms and track their progression over time.
 - **Symptom History**: View a history of logged symptoms for each patient.
-- **Admin Dashboard**: Admin users can manage and monitor the patient's symptom logs.
+
   
 ## Tech Stack
 
@@ -23,7 +23,7 @@ To run the project locally, follow these steps:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/Patient-Symptom-Tracker.git
+git clone https://github.com/Jokinth/Patient-Symptom-Tracker.git
 cd Patient-Symptom-Tracker
 ```
 
