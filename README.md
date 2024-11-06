@@ -83,18 +83,3 @@ Patient-Symptom-Tracker/
 │   └── package.json    # Frontend dependencies and settings
 └── README.md           # Project documentation
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-name`)
-3. Commit your changes (`git commit -am 'Add feature'`)
-4. Push to the branch (`git push origin feature-name`)
-5. Create a new Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
-
-You can now copy and paste this text into your `README.md` file! Let me know if you need any more changes.
