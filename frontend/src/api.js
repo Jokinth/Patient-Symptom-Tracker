@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'resourceful-presence-production.up.railway.app';
 
 // Helper function to get the token from localStorage
 const getAuthToken = () => {
