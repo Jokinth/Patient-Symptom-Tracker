@@ -17,7 +17,7 @@ const Signup = () => {
 
         try {
             // Send request to the signup endpoint
-            const response = await fetch('patient-symptom-tracker-production.up.railway.app/signup/', {
+            const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/signup/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
