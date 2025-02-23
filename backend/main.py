@@ -18,7 +18,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://patient-symptom-tracker.vercel.app"],  # Allow all origins (use only for testing!)
+    allow_origins=["https://patient-symptom-tracker.vercel.app","*"],  # Allow all origins (use only for testing!)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
