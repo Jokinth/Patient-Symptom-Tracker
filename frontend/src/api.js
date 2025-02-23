@@ -8,7 +8,7 @@ const getAuthToken = () => {
 };
 
 // Function for signing up a user
-export const signup = async (userData) => {
+export const signup = async (userData) => {  
     return await axios.post(`${API_URL}/signup/`, userData);
 };
 
