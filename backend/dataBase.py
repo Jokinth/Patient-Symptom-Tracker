@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 
-MONGO_DETAILS = "mongodb://127.0.0.1:27017"
+MONGO_DETAILS = "maglev.proxy.rlwy.net:52256"
 
 client = MongoClient(MONGO_DETAILS)
 database = client.Tracker
