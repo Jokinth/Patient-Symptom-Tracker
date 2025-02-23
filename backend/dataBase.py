@@ -1,8 +1,11 @@
 from pymongo import MongoClient
 
-# Replace with your actual MongoDB URI from Railway
-MONGODB_URI = "mongodb://mongo:FEbHVqzLCTpeDSxLvKWAYXzZqiMMiCBw@maglev.proxy.rlwy.net:52256"
+# MongoDB URI with database name in the connection string
+MONGODB_URI = 'mongodb://mongo:FEbHVqzLCTpeDSxLvKWAYXzZqiMMiCBw@maglev.proxy.rlwy.net:52256/my_database'
 
 client = MongoClient(MONGODB_URI)
-db = client.get_database()  # You can specify the name of the database here
-users_collection = db.users  # Example collection
+db = client['my_database']  # Use the database name here
+
+# Now you can access collections
+collection = db['your_collection_name']
+users_collection = db['users']
