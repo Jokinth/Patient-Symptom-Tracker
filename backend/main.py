@@ -18,19 +18,21 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://patient-symptom-tracker.vercel.app"],  # Allow all origins (use only for testing!)
+    allow_origins=["https://patient-symptom-tracker.vercel.app"],  # Allow Vercel frontend
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Allow all HTTP methods, including OPTIONS
+    allow_headers=["*"],  # Allow all headers in the request
 )
+
+# Manually handle preflight requests (OPTIONS)
 @app.options("/{path_name:path}")
 async def handle_options(path_name: str, request: Request):
     """
-    Handle OPTIONS requests for all routes.
-    This helps handle CORS preflight requests manually.
+    Handle OPTIONS requests (preflight).
+    This is critical for allowing browsers to perform CORS preflight checks.
     """
     return JSONResponse(content={}, status_code=200)
-
+    
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OAuth2 Password Bearer for JWT
