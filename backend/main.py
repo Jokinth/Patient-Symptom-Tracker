@@ -23,6 +23,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+@app.options("/{path_name:path}")
+async def handle_options(path_name: str, request: Request):
+    """
+    Handle OPTIONS requests for all routes.
+    This helps handle CORS preflight requests manually.
+    """
+    return JSONResponse(content={}, status_code=200)
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OAuth2 Password Bearer for JWT
