@@ -7,7 +7,7 @@ app = FastAPI()
 # Read MongoDB URI from environment variable
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://mongo:FEbHVqzLCTpeDSxLvKWAYXzZqiMMiCBw@maglev.proxy.rlwy.net:52256")  # Fallback to hardcoded if not set
 
-client = MongoClient(MONGO_URI)
+client = MongoClient(MONGO_URI,serverSelectionTimeoutMS=10000)
 database = client.Tracker
 collection = database.Symptoms
 users_collection = database.Users
