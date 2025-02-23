@@ -11,54 +11,47 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
-        e.preventDefault();
-        setLoading(true); // Start loading
-        setError(''); // Reset any previous error
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-        try {
-            // Send request to the signup endpoint
-            const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/signup/', {
+    try {
+        const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/signup/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password }),
+        });
+
+        if (response.ok) {
+            const loginResponse = await fetch('https://patient-symptom-tracker-production.up.railway.app/login/', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name, email, password }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
             });
 
-            if (response.ok) {
-                
-                // After successful signup, automatically log the user in
-                const loginResponse = await fetch('https://patient-symptom-tracker-production.up.railway.app/login/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
-
-                if (loginResponse.ok) {
-                    const loginData = await loginResponse.json();
-                    // Save the token in localStorage
-                    localStorage.setItem('access_token', loginData.access_token);
-                    localStorage.setItem('user_id', loginData.user_id); // Optionally store user_id as well
-                    alert('Signup successful! You are now logged in.');
-                    setName(''); // Clear the name input
-                    setEmail(''); // Clear the email input
-                    setPassword(''); // Clear the password input
-                    navigate('/logger'); // Navigate to the symptom logger page
-                } else {
-                    setError('Login failed after signup. Please try again.');
-                }
+            if (loginResponse.ok) {
+                const loginData = await loginResponse.json();
+                localStorage.setItem('access_token', loginData.access_token);
+                localStorage.setItem('user_id', loginData.user_id);
+                alert('Signup successful! You are now logged in.');
+                setName('');
+                setEmail('');
+                setPassword('');
+                navigate('/logger');
             } else {
-                const errorData = await response.json();
-                setError(errorData.detail || 'Signup failed: The email may already be in use.');
+                setError('Login failed after signup. Please try again.');
             }
-        } catch (error) {
-            setError('An error occurred. Please try again later.');
-        } finally {
-            setLoading(false); // Stop loading
+        } else {
+            const errorData = await response.json();
+            setError(errorData.detail || 'Signup failed: The email may already be in use.');
         }
-    };
+    } catch (error) {
+        setError('An error occurred. Please try again later.');
+    } finally {
+        setLoading(false);
+    }
+};
+
 
     return (
         <div>
