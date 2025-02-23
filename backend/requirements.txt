@@ -1,7 +1,7 @@
-bson==0.5.10
-fastapi==0.110.0  # Updated to latest version
+fastapi==0.95.0
 uvicorn==0.23.0
-pydantic==2.7.4  # Compatible with latest FastAPI
+pydantic==2.7.4
 passlib[bcrypt]==1.7.4
 python-jose==3.3.0
 motor==3.3.2
+pymongo==4.6.1  # Ensure this is included
