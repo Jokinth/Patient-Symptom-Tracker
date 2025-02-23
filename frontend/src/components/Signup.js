@@ -28,7 +28,7 @@ const Signup = () => {
             if (response.ok) {
                 
                 // After successful signup, automatically log the user in
-                const loginResponse = await fetch('patient-symptom-tracker-production.up.railway.app/login/', {
+                const loginResponse = await fetch('https://patient-symptom-tracker-production.up.railway.app/login/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
