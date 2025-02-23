@@ -17,7 +17,7 @@ const Signup = () => {
 
         try {
             // Send request to the signup endpoint
-            const response = await fetch('http://localhost:8000/signup/', {
+            const response = await fetch('patient-symptom-tracker-production.up.railway.app/signup/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const Signup = () => {
             if (response.ok) {
                 
                 // After successful signup, automatically log the user in
-                const loginResponse = await fetch('http://localhost:8000/login/', {
+                const loginResponse = await fetch('patient-symptom-tracker-production.up.railway.app/login/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
