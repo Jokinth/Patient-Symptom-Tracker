@@ -20,7 +20,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://your-frontend.vercel.app"],  # ✅ Replace with your actual frontend URL
+    allow_origins=["https://patient-symptom-tracker.vercel.app"],  # ✅ Replace with your actual frontend URL
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # ✅ Explicitly allow necessary methods
     allow_headers=["Authorization", "Content-Type", "Accept"],  # ✅ Ensure valid headers
