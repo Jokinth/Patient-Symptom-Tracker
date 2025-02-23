@@ -16,7 +16,7 @@ const Signup = () => {
     setError('');
 
     try {
-        const response = await fetch('https://your-backend-url.up.railway.app/signup/', {
+        const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/signup/', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
