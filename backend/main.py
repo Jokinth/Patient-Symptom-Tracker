@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from pydantic import BaseModel, EmailStr, Field
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from passlib.context import CryptContext
 from dataBase import collection, users_collection
@@ -16,8 +16,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 app = FastAPI()
 
-from fastapi.middleware.cors import CORSMiddleware
-
+# Add CORSMiddleware to handle CORS for preflight requests
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://patient-symptom-tracker.vercel.app"],  # ✅ Replace with your actual frontend URL
@@ -26,6 +25,16 @@ app.add_middleware(
     allow_headers=["Authorization", "Content-Type", "Accept"],  # ✅ Ensure valid headers
     expose_headers=["Authorization", "Content-Type"],  # ✅ Expose headers if needed
 )
+
+# Custom CORS middleware to add Access-Control headers
+@app.middleware("http")
+async def add_cors_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "https://patient-symptom-tracker.vercel.app"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type, Accept"
+    return response
+
 @app.options("/{full_path:path}")
 async def preflight_handler():
     return {}
@@ -66,7 +75,6 @@ def symptom_serializer(symptom) -> dict:
     }
 
 # JWT Token Utilities
-
 def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)):
     to_encode = data.copy()
     expire = datetime.utcnow() + expires_delta
@@ -135,4 +143,5 @@ async def login(user: UserLogin):
         raise HTTPException(status_code=400, detail="Invalid email or password")
 
     access_token = create_access_token(data={"user_id": str(db_user["_id"])})
+
     return {"access_token": access_token, "token_type": "bearer"}
