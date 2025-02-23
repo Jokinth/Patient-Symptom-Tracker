@@ -17,8 +17,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000",
-    "https://patient-symptom-tracker-q4vtt5eph-jokinths-projects.vercel.app"
+    "*"
 ]
 
 app.add_middleware(
