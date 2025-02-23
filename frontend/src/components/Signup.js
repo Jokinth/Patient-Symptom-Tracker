@@ -16,11 +16,15 @@ const Signup = () => {
     setError('');
 
     try {
-        const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/signup/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password }),
-        });
+        const response = await fetch('https://your-backend-url.up.railway.app/signup/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    },
+    body: JSON.stringify({ name, email, password }),
+});
+
 
         if (response.ok) {
             const loginResponse = await fetch('https://patient-symptom-tracker-production.up.railway.app/login/', {
