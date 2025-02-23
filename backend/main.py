@@ -23,7 +23,10 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all HTTP methods, including OPTIONS
     allow_headers=["*"],  # Allow all headers in the request
 )
-    
+
+@app.options("/{full_path:path}")
+async def handle_options():
+    return {}
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OAuth2 Password Bearer for JWT
