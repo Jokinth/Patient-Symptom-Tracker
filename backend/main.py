@@ -16,17 +16,16 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 app = FastAPI()
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow Vercel frontend
+    allow_origins=["https://your-frontend.vercel.app"],  # Replace with your Vercel frontend URL
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods, including OPTIONS
-    allow_headers=["*"],  # Allow all headers in the request
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Explicitly allow necessary methods
+    allow_headers=["Authorization", "Content-Type"],  # Allow specific headers
 )
 
-@app.options("/{full_path:path}")
-async def handle_options():
-    return {}
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OAuth2 Password Bearer for JWT
