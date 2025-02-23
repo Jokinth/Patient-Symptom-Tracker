@@ -18,6 +18,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    "https://patient-symptom-tracker.vercel.app"
 ]
 
 app.add_middleware(
