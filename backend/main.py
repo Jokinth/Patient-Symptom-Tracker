@@ -20,10 +20,11 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://your-frontend.vercel.app"],  # Replace with your Vercel frontend URL
+    allow_origins=["https://your-frontend.vercel.app"],  # ✅ Replace with your actual frontend URL
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Explicitly allow necessary methods
-    allow_headers=["Authorization", "Content-Type"],  # Allow specific headers
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # ✅ Explicitly allow necessary methods
+    allow_headers=["Authorization", "Content-Type", "Accept"],  # ✅ Ensure valid headers
+    expose_headers=["Authorization", "Content-Type"],  # ✅ Expose headers if needed
 )
 @app.options("/{full_path:path}")
 async def preflight_handler():
