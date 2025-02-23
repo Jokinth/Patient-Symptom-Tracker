@@ -25,6 +25,9 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Explicitly allow necessary methods
     allow_headers=["Authorization", "Content-Type"],  # Allow specific headers
 )
+@app.options("/{full_path:path}")
+async def preflight_handler():
+    return {}
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
