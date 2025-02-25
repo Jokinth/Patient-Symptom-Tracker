@@ -9,6 +9,8 @@ import jwt
 from fastapi.security import OAuth2PasswordBearer
 from typing import Optional
 import os
+import uvicorn
+
 # Constants for JWT
 SECRET_KEY = "25"  
 ALGORITHM = "HS256"
