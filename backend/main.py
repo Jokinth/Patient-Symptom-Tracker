@@ -157,3 +157,6 @@ async def login(user: UserLogin):
     access_token = create_access_token(data={"user_id": str(db_user["_id"])})
 
     return {"access_token": access_token, "token_type": "bearer"}
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))  # Use Railway-assigned port
+    uvicorn.run(app, host="0.0.0.0", port=port)
