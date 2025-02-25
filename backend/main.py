@@ -160,5 +160,6 @@ async def login(user: UserLogin):
 
     return {"access_token": access_token, "token_type": "bearer"}
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8000))  # Use Railway-assigned port
+    port = int(os.environ.get("PORT", 8080))  # Get PORT from Railway, default to 8080
+    print(f"Starting FastAPI on port {port}")  # Debug log
     uvicorn.run(app, host="0.0.0.0", port=port)
