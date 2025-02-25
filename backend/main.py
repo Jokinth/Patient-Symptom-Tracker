@@ -19,7 +19,7 @@ app = FastAPI()
 # Add CORSMiddleware to handle CORS for preflight requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://patient-symptom-tracker.vercel.app"],  # ✅ Replace with your actual frontend URL
+    allow_origins=["*"],  # ✅ Replace with your actual frontend URL
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # ✅ Explicitly allow necessary methods
     allow_headers=["Authorization", "Content-Type", "Accept"],  # ✅ Ensure valid headers
@@ -36,8 +36,16 @@ async def add_cors_headers(request: Request, call_next):
     return response
 
 @app.options("/{full_path:path}")
-async def preflight_handler():
-    return {}
+async def preflight_handler(full_path: str):
+    return JSONResponse(
+        content={},
+        headers={
+            "Access-Control-Allow-Origin": "https://patient-symptom-tracker.vercel.app",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Authorization, Content-Type, Accept",
+            "Access-Control-Max-Age": "86400",  # Cache preflight response for 24 hours
+        },
+    )
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
