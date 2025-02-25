@@ -47,7 +47,7 @@ const SymptomLogger = () => {
         setLoading(true); // Set loading to true before making the request
 
         try {
-            const response = await fetch('http://localhost:8000/symptoms/', {
+            const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/symptoms/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
