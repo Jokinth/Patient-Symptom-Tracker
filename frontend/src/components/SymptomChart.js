@@ -21,7 +21,7 @@ const SymptomChart = () => {
                 }
 
                 // Fetch symptoms for the logged-in user, passing token in the Authorization header
-                const response = await fetch('http://localhost:8000/symptoms/', {
+                const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/symptoms/', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
