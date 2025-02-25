@@ -30,7 +30,7 @@ app.add_middleware(
 @app.middleware("http")
 async def add_cors_headers(request: Request, call_next):
     response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = "https://patient-symptom-tracker.vercel.app"
+    response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
     response.headers["Access-Control-Allow-Headers"] = "Authorization, Content-Type, Accept"
     return response
@@ -40,10 +40,9 @@ async def preflight_handler(full_path: str):
     return JSONResponse(
         content={},
         headers={
-            "Access-Control-Allow-Origin": "https://patient-symptom-tracker.vercel.app",
+            "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
             "Access-Control-Allow-Headers": "Authorization, Content-Type, Accept",
-            "Access-Control-Max-Age": "86400",  # Cache preflight response for 24 hours
         },
     )
 
