@@ -8,7 +8,7 @@ from bson import ObjectId  # To handle MongoDB ObjectIds
 import jwt
 from fastapi.security import OAuth2PasswordBearer
 from typing import Optional
-
+import os
 # Constants for JWT
 SECRET_KEY = "25"  
 ALGORITHM = "HS256"
