@@ -46,6 +46,11 @@ async def preflight_handler(full_path: str):
         },
     )
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OAuth2 Password Bearer for JWT
