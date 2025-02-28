@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';  // Use the correct import
+import { jwtDecode } from 'jwt-decode';
 import { getRecommendations } from './healthRecommendations';
 import NavBar from './NavBar';
 import './SymptomLogger.css';
@@ -10,76 +10,66 @@ const SymptomLogger = () => {
     const [name, setName] = useState('');
     const [severity, setSeverity] = useState(1);
     const [message, setMessage] = useState('');
-    const [loading, setLoading] = useState(false); // State for handling loading
-    const [error, setError] = useState(''); // State for handling error
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleLogSymptom = async (e) => {
         e.preventDefault();
 
-        // Retrieve the access token from localStorage
         const token = localStorage.getItem("access_token");
 
         if (!token) {
             setError('Please log in first.');
-            setMessage(''); // Clear success message on error
+            setMessage('');
             return;
         }
 
-        // Decode the token to get user_id
         let userId = '';
         try {
-            const decodedToken = jwtDecode(token); // Decode the token
-            userId = decodedToken.user_id; // Extract user_id from decoded token
+            const decodedToken = jwtDecode(token);
+            userId = decodedToken.user_id;
         } catch (error) {
             setError('Failed to decode the token.');
-            setMessage(''); // Clear success message on error
+            setMessage('');
             return;
         }
 
-
-        // Prepare the symptom data
         const symptomData = {
-            name: name,        // Ensure name is not empty
-            severity: severity, // Ensure severity is a number (1-10)
-            user_id: userId,   // Add user_id from the decoded token
+            name: name,
+            severity: severity,
+            user_id: userId,
         };
 
-        setLoading(true); // Set loading to true before making the request
+        setLoading(true);
 
         try {
             const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/symptoms/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(symptomData), // Send symptom name, severity, and user_id to the backend
+                body: JSON.stringify(symptomData),
             });
 
             if (response.ok) {
-                const recommendations = getRecommendations(name.toLowerCase()); // Get recommendations for the logged symptom
-
-                // Set success message
+                const recommendations = getRecommendations(name.toLowerCase());
                 setMessage('Symptom logged successfully!');
-                setError(''); // Clear any error messages
-                
-                // Navigate to recommendations page with state
+                setError('');
                 navigate('/recommendations', {
-                    state: { recommendations, message: 'Symptom logged successfully!' ,severity},
+                    state: { recommendations, message: 'Symptom logged successfully!', severity },
                 });
-                
-                // Clear inputs after successful submission
                 setName('');
                 setSeverity(1);
             } else {
                 setError('Failed to log symptom. Please try again.');
-                setMessage(''); // Clear success message on error
+                setMessage('');
             }
         } catch (error) {
             setError('An error occurred while logging the symptom.');
-            setMessage(''); // Clear success message on error
+            setMessage('');
         } finally {
-            setLoading(false); // Reset loading state after request is complete
+            setLoading(false);
         }
     };
 
@@ -106,7 +96,6 @@ const SymptomLogger = () => {
                 />
                 <button type="submit" disabled={loading}>Log Symptom</button>
             </form>
-
             {loading && <p>Logging your symptom...</p>}
             {message && <p>{message}</p>}
             {error && <p style={{ color: 'red' }}>{error}</p>}
