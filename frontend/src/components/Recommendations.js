@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getRecommendations } from './healthRecommendations'; // Import getRecommendations function
 import NavBar from './NavBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Recommendations.css';
 
 const Recommendations = () => {
@@ -12,31 +13,29 @@ const Recommendations = () => {
     const [recommend, setRecommend] = useState(''); // State for doctor recommendation
 
     useEffect(() => {
-        // Check if state is passed from the previous page
         const { name, message: passedMessage, recommendations: passedRecommendations, severity } = location.state || {};
         
         if (passedMessage) {
-            setMessage(passedMessage); // If message is passed, set it
+            setMessage(passedMessage);
         } else {
-            setMessage('No message available.'); // Default message
+            setMessage('No message available.');
         }
 
         if (passedRecommendations && passedRecommendations.length > 0) {
-            setRecommendations(passedRecommendations); // Set recommendations if passed
+            setRecommendations(passedRecommendations);
         } else if (name) {
             const fetchedRecommendations = getRecommendations(name.toLowerCase());
-            setRecommendations(fetchedRecommendations); // Otherwise fetch recommendations based on symptom name
+            setRecommendations(fetchedRecommendations);
             
             if (fetchedRecommendations.length > 0) {
-                setMessage('Recommendations found!'); // Update message if recommendations are available
+                setMessage('Recommendations found!');
             } else {
                 setMessage('No recommendations available for this symptom.');
             }
         } else {
-            setMessage('No symptom data provided.'); // Handle missing symptom name
+            setMessage('No symptom data provided.');
         }
 
-        // Check if severity is high, and add "Go to doctor" recommendation
         if (severity > 7) {
             setRecommend('Severity is high. We recommend you visit a doctor.');
         } else {
@@ -49,26 +48,25 @@ const Recommendations = () => {
     };
 
     return (
-        <div className="recommendations-container">
+        <div className="container">
             <NavBar />
-            <div className="content">
-                {message && <p className="message">{message}</p>} {/* Display the message */}
-                <h2 className="header">Health Recommendations</h2>
+            <div className="card mt-4 p-4 shadow-lg">
+                {message && <p className="alert alert-info">{message}</p>}
+                <h2 className="text-center">Health Recommendations</h2>
                 
                 {recommendations.length > 0 ? (
-                    <ul className="recommendation-list">
+                    <ul className="list-group mt-3">
                         {recommendations.map((tip, index) => (
-                            <li key={index} className="recommendation-item">* {tip}</li>
+                            <li key={index} className="list-group-item">* {tip}</li>
                         ))}
                     </ul>
                 ) : (
-                    <p className="no-recommendations">No recommendations available.</p>
+                    <p className="text-danger text-center mt-3">No recommendations available.</p>
                 )}
 
-                {/* Display the "Go to doctor" recommendation if severity is high */}
-                {recommend && <p className="doctor-recommendation">{recommend}</p>}
+                {recommend && <p className="alert alert-warning text-center mt-3">{recommend}</p>}
 
-                <button className="go-back-button" onClick={handleGoBack}>Go Back to Logger</button>
+                <button className="btn btn-primary w-100 mt-3" onClick={handleGoBack}>Go Back to Logger</button>
             </div>
         </div>
     );
