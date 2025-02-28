@@ -7,10 +7,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const SymptomChart = () => {
     const [symptoms, setSymptoms] = useState([]);
-    const [loading, setLoading] = useState(true); // New state for loading
-    const [error, setError] = useState(null); // New state for error handling
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Retrieve the token from localStorage
     const token = localStorage.getItem('access_token');
 
     useEffect(() => {
@@ -20,34 +19,32 @@ const SymptomChart = () => {
                     throw new Error("User is not authenticated. Please log in.");
                 }
 
-                // Fetch symptoms for the logged-in user, passing token in the Authorization header
                 const response = await fetch('https://patient-symptom-tracker-production.up.railway.app/symptoms/', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`, // Pass the token in the Authorization header
+                        'Authorization': `Bearer ${token}`,
                     },
                 });
 
                 if (response.ok) {
                     const data = await response.json();
-                    setSymptoms(data); // Update the symptoms state with the fetched data
+                    setSymptoms(data);
                 } else {
                     throw new Error("Failed to fetch symptoms for user");
                 }
             } catch (error) {
-                setError(error.message); // Set the error state
+                setError(error.message);
             } finally {
-                setLoading(false); // Stop loading once data is fetched
+                setLoading(false);
             }
         };
 
-        fetchSymptoms(); // Fetch symptoms on component mount
-    }, [token]); // Depend on token to reload if it changes
+        fetchSymptoms();
+    }, [token]);
 
-    // Process the data for the chart
     const chartData = {
-        labels: symptoms.map(symptom => symptom.date), // Use date as the label on X-axis
+        labels: symptoms.map(symptom => symptom.date),
         datasets: [
             {
                 label: 'Severity',
@@ -75,7 +72,7 @@ const SymptomChart = () => {
                 },
                 ticks: {
                     autoSkip: true,
-                    maxRotation: 45, // Rotate labels if needed for better readability
+                    maxRotation: 45,
                     minRotation: 45,
                 },
             },
